@@ -1,0 +1,28 @@
+grumphp:
+    tasks:
+        phpcsfixer:
+            allow_risky: ~
+            cache_file: ~
+            config: ~
+            rules: ['@Symfony']
+            using_cache: ~
+            config_contains_finder: true
+            verbose: true
+            diff: false
+            triggered_by: [ 'php' ]
+        phpstan:
+            memory_limit: "-1"
+            use_grumphp_paths: false
+            level: 7
+        phpunit:
+            testsuite: "Unit"
+        phpcs:
+            standard: 'PSR12'
+            ignore_patterns:
+                - /migrations\/(.*)/
+                - /^config\/(.*)/
+                - /DataFixtures\/(.*)/
+
+    parallel:
+        enabled: true
+        max_workers: 4

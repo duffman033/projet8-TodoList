@@ -22,9 +22,12 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/users/create', name: 'app_user_create', methods: ['GET','POST'])]
-    public function create(ManagerRegistry $manager, UserPasswordHasherInterface $passwordHasher, Request $request): Response
-    {
+    #[Route('/users/create', name: 'app_user_create', methods: ['GET', 'POST'])]
+    public function create(
+        ManagerRegistry $manager,
+        UserPasswordHasherInterface $passwordHasher,
+        Request $request
+    ): Response {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
@@ -50,9 +53,13 @@ class UserController extends AbstractController
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/users/{id}/edit', name: 'app_user_edit', methods: ['GET','POST'])]
-    public function edit(ManagerRegistry $manager, User $user, UserPasswordHasherInterface $passwordHasher, Request $request)
-    {
+    #[Route('/users/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        ManagerRegistry $manager,
+        User $user,
+        UserPasswordHasherInterface $passwordHasher,
+        Request $request
+    ) {
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);

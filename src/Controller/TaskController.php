@@ -17,11 +17,11 @@ class TaskController extends AbstractController
     public function list(TaskRepository $taskRepository)
     {
         return $this->render('task/list.html.twig', [
-            'tasks' => $taskRepository->findAll()
+            'tasks' => $taskRepository->findAll(),
         ]);
     }
 
-    #[Route('/tasks/create', name: 'app_task_create', methods: ['GET','POST'])]
+    #[Route('/tasks/create', name: 'app_task_create', methods: ['GET', 'POST'])]
     public function create(ManagerRegistry $manager, Request $request): Response
     {
         $task = new Task();
@@ -43,7 +43,7 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/tasks/{id}/edit', name: 'app_task_edit', methods: ['GET','POST'])]
+    #[Route('/tasks/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
     public function edit(ManagerRegistry $manager, Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
@@ -64,7 +64,7 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/tasks/{id}/toggle', name: 'app_task_toggle', methods: ['GET','POST'])]
+    #[Route('/tasks/{id}/toggle', name: 'app_task_toggle', methods: ['GET', 'POST'])]
     public function toggleTask(ManagerRegistry $manager, Task $task)
     {
         $task->toggle(!$task->isDone());
