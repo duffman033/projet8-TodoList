@@ -26,19 +26,19 @@ Configurer la connexction à votre base de données dans le fichier .env
 Maintenant, effectuez la commande "bin/console doctrine:database:create" pour créer votre base de données :
 
 ```text
-bin/console doctrine:database:create
+php bin/console doctrine:database:create
 ```
 
-Tapez la commande "bin/console doctrine:schema:create" pour créer le shéma de données dans votre base de données :
+Tapez la commande "php bin/console doctrine:schema:create" pour créer le shéma de données dans votre base de données :
 
 ```text
-bin/console doctrine:schema:create
+php bin/console doctrine:schema:create
 ```
 
-Maintenant avec la commande "bin/console doctrine:fixtures:load" vous allez migrer les données dans votre base de données:
+Maintenant avec la commande "php bin/console doctrine:fixtures:load" vous allez migrer les données dans votre base de données:
 
 ```text
-bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load
 ```
 
 
