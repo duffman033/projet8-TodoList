@@ -82,6 +82,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "csfix": [
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix",
+            "git add . && git commit -m '🎨 Apply PHP CS Fixer'"
         ]
     },
     "conflict": {
