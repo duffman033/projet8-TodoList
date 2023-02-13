@@ -26,17 +26,13 @@ class TaskVoter extends Voter
             return false;
         }
 
-        if ('ROLE_ADMIN' === $user->getRoles()) {
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             return true;
         }
 
-        switch ($attribute) {
-            case self::DELETE:
-            case self::EDIT:
-                return $task->getUser()->getId() === $user->getId();
-                break;
-        }
-
-        return false;
+        return match ($attribute) {
+            self::DELETE, self::EDIT => $task->getUser()->getId() === $user->getId(),
+            default => false,
+        };
     }
 }
