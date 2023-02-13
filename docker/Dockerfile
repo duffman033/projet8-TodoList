@@ -8,8 +8,19 @@ RUN apt update \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
 
-WORKDIR /var/www/projet8-todolist
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+RUN groupadd -g 1000 -r kiora \
+ && useradd -u 1000 -r -g kiora kiora \
+ && mkdir -p /home/kiora/.ssh \
+ && chown -R kiora:kiora /home/kiora \
+ && chown -R kiora:kiora /var/www
+
+USER kiora
+
+WORKDIR /var/www/projet8-todolist
