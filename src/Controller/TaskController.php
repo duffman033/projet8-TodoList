@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use App\Security\TaskVoter;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $manager->getManager();
-
+            $task->setUsers($this->getUser());
             $em->persist($task);
             $em->flush();
 
@@ -46,6 +47,7 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
     public function edit(ManagerRegistry $manager, Task $task, Request $request)
     {
+        $this->denyAccessUnlessGranted(TaskVoter::EDIT, $task);
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
@@ -78,6 +80,7 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/delete', name: 'app_task_delete', methods: ['POST'])]
     public function deleteTask(ManagerRegistry $manager, Task $task): Response
     {
+        $this->denyAccessUnlessGranted(TaskVoter::DELETE, $task);
         $em = $manager->getManager();
         $em->remove($task);
         $em->flush();

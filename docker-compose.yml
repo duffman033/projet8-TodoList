@@ -1,6 +1,11 @@
 version: "3.8"
 
 services:
+    newrelic:
+        container_name: todolist-newrelic
+        image: newrelic/php-daemon
+        networks:
+            - main
     database:
         image: mysql:8.0
         command: --default-authentication-plugin=mysql_native_password
@@ -11,13 +16,17 @@ services:
             MYSQL_PASSWORD: symfony
         ports:
             - '4306:3306'
+        networks:
+            - main
     php:
         build:
             context: ./docker
         volumes:
-            - .:/var/www/projet8-todolist
+          - .:/var/www/projet8-todolist
         depends_on:
-            - database
+          - database
+        networks:
+            - main
     nginx:
         image: nginx:stable-alpine
         ports:
@@ -28,3 +37,7 @@ services:
         depends_on:
             - php
             - database
+        networks:
+            - main
+networks:
+    main:
