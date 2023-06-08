@@ -44,4 +44,3 @@ RUN groupadd -g 1000 -r kiora \
 USER kiora
 
 WORKDIR /var/www/projet8-todolist
-
