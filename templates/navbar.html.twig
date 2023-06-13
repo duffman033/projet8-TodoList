@@ -1,0 +1,21 @@
+<nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('app_default') }}">To Do List app</a>
+            <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" />
+        </div>
+        <div class="navbar-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_user_create') }}" class="btn btn-primary mr-2">Créer un utilisateur</a>
+                <a href="{{ path('app_user_list') }}" class="btn btn-warning mr-2">Liste d'utilisateur</a>
+            {% endif %}
+            {% if app.user %}
+                <a href="{{ path('app_task_create') }}" class="btn btn-info mr-2">Créer une tâche</a>
+                <a href="{{ path('app_logout') }}" class="btn btn-danger mr-2">Se déconnecter</a>
+            {% endif %}
+            {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                <a href="{{ path('app_login') }}" class="btn btn-success mr-2">Se connecter</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

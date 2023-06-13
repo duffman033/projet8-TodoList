@@ -6,6 +6,9 @@ use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
@@ -90,7 +93,7 @@ class Task
         return $this;
     }
 
-    public function getUsers(): ?User
+    public function getUser(): ?User
     {
         return $this->users;
     }

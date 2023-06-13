@@ -18,7 +18,7 @@ class TaskController extends AbstractController
     public function list(TaskRepository $taskRepository)
     {
         return $this->render('task/list.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $taskRepository->findBy(['isDone' => 0]),
         ]);
     }
 
@@ -42,6 +42,14 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    #[Route('/tasks/ending', name: 'app_task_list_ending')]
+    public function listEnding(TaskRepository $taskRepository)
+    {
+        return $this->render('task/list.html.twig', [
+            'tasks' => $taskRepository->findBy(['isDone' => 1])
+        ]);
     }
 
     #[Route('/tasks/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]

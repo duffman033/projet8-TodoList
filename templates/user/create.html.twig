@@ -5,10 +5,45 @@
 
 {% block body %}
     <div class="row">
-        {{ form_start(form, {'action' : path('app_user_create')}) }}
-            {{ form_widget(form) }}
-
-            <button type="submit" class="btn btn-success pull-right">Ajouter</button>
-        {{ form_end(form) }}
+        <div class="col-md-6 offset-md-3">
+            {{ form_start(form, {'action' : path('app_user_create'), 'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+            <div class="mb-3">
+                {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'required': ''}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.username) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.email, 'Adresse email', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'required': '', 'type': 'email'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password.first, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'required': ''}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.password.first) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password.second, 'Tapez le mot de passe à nouveau', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'required': ''}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.password.second) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.roles, 'Roles d\'utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.roles, {'attr': {'class': 'form-select', 'required': ''}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.roles) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Ajouter</button>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

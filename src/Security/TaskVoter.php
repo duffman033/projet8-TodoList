@@ -12,13 +12,13 @@ class TaskVoter extends Voter
     public const DELETE = 'delete';
     public const EDIT = 'edit';
 
-    protected function supports($attribute, $subject): bool
+    public function supports($attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::DELETE], true)
             && $subject instanceof Task;
     }
 
-    protected function voteOnAttribute($attribute, $task, TokenInterface $token): bool
+    public function voteOnAttribute($attribute, $task, TokenInterface $token): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
